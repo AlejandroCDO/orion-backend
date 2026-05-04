@@ -2,6 +2,7 @@ import { Injectable, NotFoundException, BadRequestException } from '@nestjs/comm
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CreateSessionDto, UpdateSessionDto } from '../pelicula/dto/pelicula.dto/session.dto';
+import { Cron } from '@nestjs/schedule';
 
 @Injectable()
 export class SessionService {
@@ -95,5 +96,17 @@ export class SessionService {
     // markModified es necesario porque Mongoose no detecta cambios en arrays anidados
     session.markModified('asientos');
     await session.save();
+  }
+
+  @Cron('0 3 * * *')
+  async limpiarSesionesCaducadas(): Promise<void> {
+    const hoy = new Date();
+    hoy.setHours(0, 0, 0, 0);
+
+    const resultado = await this.sessionModel
+      .deleteMany({ fecha: { $lt: hoy } })
+      .exec();
+
+    console.log(`[CRON] Sesiones caducadas eliminadas: ${resultado.deletedCount}`);
   }
 }
