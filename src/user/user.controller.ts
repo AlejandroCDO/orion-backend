@@ -8,7 +8,6 @@ export class UserController {
 
   constructor(private readonly userService: UserService) {}
 
-  // GET /api/v2/users — todos los usuarios (admin)
   @Get()
   @UseGuards(JwtAuthGuard)
   async getAllUsers() {
@@ -20,7 +19,6 @@ export class UserController {
     }
   }
 
-  // GET /api/v2/users/:userId/valoraciones — reseñas de un usuario (admin)
   @Get(':userId/valoraciones')
   @UseGuards(JwtAuthGuard)
   async getValoracionesUsuario(@Param('userId') userId: string) {

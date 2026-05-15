@@ -29,7 +29,6 @@ export class ValoracionService {
     const pelicula = await this.peliculaModel.findById(peliculaId).exec();
     if (!pelicula) throw new NotFoundException({ status: false, message: 'Película no encontrada' });
 
-    // Upsert — crea si no existe, actualiza si existe
     const valoracion = await this.valoracionModel.findOneAndUpdate(
       { peliculaId, userId },
       { puntuacion, comentario },

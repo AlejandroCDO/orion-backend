@@ -22,7 +22,6 @@ import { CreateSessionDto, UpdateSessionDto } from '../pelicula/dto/pelicula.dto
 export class SessionController {
   constructor(private readonly sessionService: SessionService) {}
 
-  // POST /api/v2/sessions/crear — Solo admin
   @Post('crear')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles('admin')
@@ -35,7 +34,6 @@ export class SessionController {
     }
   }
 
-  // GET /api/v2/sessions — Pública
   @Get('')
   async getAllSessions() {
     try {
@@ -46,7 +44,6 @@ export class SessionController {
     }
   }
 
-  // GET /api/v2/sessions/pelicula/:movieId — Pública
   @Get('pelicula/:movieId')
   async getSessionsByMovie(@Param('movieId') movieId: string) {
     try {
@@ -57,7 +54,6 @@ export class SessionController {
     }
   }
 
-  // GET /api/v2/sessions/:id — Pública
   @Get(':id')
   async getSessionById(@Param('id') id: string) {
     try {
@@ -69,7 +65,6 @@ export class SessionController {
     }
   }
 
-  // PUT /api/v2/sessions/update/:id — Solo admin
   @Put('update/:id')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles('admin')
@@ -83,7 +78,6 @@ export class SessionController {
     }
   }
 
-  // DELETE /api/v2/sessions/delete/:id — Solo admin
   @Delete('delete/:id')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles('admin')

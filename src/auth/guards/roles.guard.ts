@@ -6,10 +6,8 @@ export class RolesGuard implements CanActivate {
   constructor(private reflector: Reflector) {}
 
   canActivate(context: ExecutionContext): boolean {
-    // Leer los roles permitidos del decorador @Roles(...)
     const requiredRoles = this.reflector.get<string[]>('roles', context.getHandler());
 
-    // Si la ruta no tiene @Roles, es pública para cualquier usuario autenticado
     if (!requiredRoles) {
       return true;
     }

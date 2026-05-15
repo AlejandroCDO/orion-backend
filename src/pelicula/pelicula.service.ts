@@ -10,18 +10,15 @@ export class PeliculaService {
     @InjectModel('Pelicula') private readonly peliculaModel: Model<ApiResponsePelicula>
   ) {}
 
-  // 1. Crear una película
   async addPelicula(peliculaDto: PeliculaDto): Promise<ApiResponsePelicula> {
     const pelicula = new this.peliculaModel(peliculaDto);
     return pelicula.save();
   }
 
-  // 2. Obtener todas las películas (Cartelera)
   async getPeliculas(): Promise<ApiResponsePelicula[]> {
     return this.peliculaModel.find().exec();
   }
 
-  // 3. Obtener una película por ID (Detalle)
   async getPeliculaById(id: string): Promise<ApiResponsePelicula> {
     const pelicula = await this.peliculaModel.findById(id).exec();
     if (!pelicula) {
@@ -33,7 +30,6 @@ export class PeliculaService {
     return pelicula;
   }
 
-  // 4. Buscar películas por título o director (Buscador)
   async getPeliculasPorTexto(texto: string): Promise<ApiResponsePelicula[]> {
     return this.peliculaModel.find({
       $or: [
@@ -43,12 +39,10 @@ export class PeliculaService {
     }).exec();
   }
 
-  // 5. Filtrar por género (Útil para filtros en Ionic)
   async getPeliculasPorGenero(genero: string): Promise<ApiResponsePelicula[]> {
     return this.peliculaModel.find({ genres: genero }).exec();
   }
 
-  // 6. Actualizar película
   async updatePelicula(idPelicula: string, peliculaDto: PeliculaDto): Promise<ApiResponsePelicula> {
     const updatedPelicula = await this.peliculaModel.findByIdAndUpdate(
       idPelicula,
@@ -65,7 +59,6 @@ export class PeliculaService {
     return updatedPelicula;
   }
 
-  // 7. Borrar película
   async deletePelicula(idPelicula: string): Promise<any> {
     const deletedPelicula = await this.peliculaModel.findByIdAndDelete(idPelicula).exec();
     if (!deletedPelicula) {
@@ -77,7 +70,6 @@ export class PeliculaService {
     return deletedPelicula;
   }
 
-  // 8. Obtener lista de géneros únicos (Para el desplegable del Admin)
   async getGenerosDisponibles(): Promise<string[]> {
     return this.peliculaModel.distinct('genres').exec();
   }

@@ -17,11 +17,10 @@ import { Roles } from '../auth/decorators/roles.decorator';
 import { CreateReservaDto } from '../pelicula/dto/pelicula.dto/reserva.dto';
 
 @Controller('/api/v2/reservas')
-@UseGuards(JwtAuthGuard) // Todas las rutas de reservas requieren estar autenticado
+@UseGuards(JwtAuthGuard)
 export class ReservaController {
   constructor(private readonly reservaService: ReservaService) {}
 
-  // POST /api/v2/reservas/crear — Cliente autenticado
   @Post('crear')
   async createReserva(@Body() dto: CreateReservaDto) {
     try {
@@ -32,7 +31,6 @@ export class ReservaController {
     }
   }
 
-  // GET /api/v2/reservas/usuario/:usuarioId — El propio usuario
   @Get('usuario/:usuarioId')
   async getReservasByUser(@Param('usuarioId') usuarioId: string) {
     try {
@@ -43,7 +41,6 @@ export class ReservaController {
     }
   }
 
-  // GET /api/v2/reservas/:id — Una reserva concreta
   @Get(':id')
   async getReservaById(@Param('id') id: string) {
     try {
@@ -55,7 +52,6 @@ export class ReservaController {
     }
   }
 
-  // GET /api/v2/reservas — Todas (Solo admin)
   @Get('')
   @UseGuards(RolesGuard)
   @Roles('admin')
@@ -68,7 +64,6 @@ export class ReservaController {
     }
   }
 
-  // DELETE /api/v2/reservas/cancelar/:id
   @Delete('cancelar/:id')
   async deleteReserva(@Param('id') id: string) {
     try {

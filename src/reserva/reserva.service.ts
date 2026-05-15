@@ -70,13 +70,11 @@ export class ReservaService {
     await this.reservaModel.deleteMany({ usuarioId }).exec();
   }
 
-  // Se ejecuta cada día a las 03:00
   @Cron('0 3 * * *')
   async limpiarReservasCaducadas(): Promise<void> {
     const hoy = new Date();
     hoy.setHours(0, 0, 0, 0);
 
-    // Busca sesiones cuya fecha ya pasó
     const sessionesCaducadas = await this.sessionModel
       .find({ fecha: { $lt: hoy } })
       .select('_id')

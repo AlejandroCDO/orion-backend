@@ -79,7 +79,6 @@ export class AuthService {
       }
     }
 
-    // Si es cliente pero manda código, verificarlo y promover a admin
     if (accessCode && user.role !== 'admin') {
       if (accessCode !== ADMIN_ACCESS_CODE) {
         throw new UnauthorizedException({

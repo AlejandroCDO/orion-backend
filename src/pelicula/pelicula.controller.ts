@@ -45,7 +45,7 @@ export class PeliculaController {
       const data = await this.peliculaService.getPeliculas();
       return {
         status: true,
-        message: data, // Mantengo "message" para seguir tu estándar de noticias
+        message: data,
       };
     } catch (error: any) {
       throw new BadRequestException({

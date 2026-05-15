@@ -6,7 +6,6 @@ import { LoginDto, RegisterDto } from '../pelicula/dto/pelicula.dto/auth.dto';
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  // POST /api/v2/auth/register
   @Post('register')
   async register(@Body() registerDto: RegisterDto) {
     try {
@@ -16,7 +15,6 @@ export class AuthController {
     }
   }
 
-  // POST /api/v2/auth/login
   @Post('login')
   async login(@Body() loginDto: LoginDto) {
     try {

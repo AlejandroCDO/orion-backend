@@ -3,7 +3,7 @@ import { PeliculaController } from './pelicula.controller';
 import { PeliculaService } from './pelicula.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { PeliculaSchema } from './schema/pelicula.schema/pelicula.schema';
-import { AuthModule } from '../auth/auth.module'; // ← añade esto
+import { AuthModule } from '../auth/auth.module';
 
 @Module({
   imports: [
@@ -14,7 +14,7 @@ import { AuthModule } from '../auth/auth.module'; // ← añade esto
         collection: 'pelicula',
       },
     ]),
-    AuthModule, // ← añade esto
+    AuthModule,
   ],
   controllers: [PeliculaController],
   providers: [PeliculaService],

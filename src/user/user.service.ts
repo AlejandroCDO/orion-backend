@@ -103,11 +103,9 @@ export class UserService {
     const result = await this.userModel.findByIdAndDelete(userId).exec();
     if (!result) throw new NotFoundException({ status: false, message: 'Usuario no encontrado' });
 
-    // Limpieza en cascada
     await this.valoracionModel.deleteMany({ userId }).exec();
     await this.reservaModel.deleteMany({ usuarioId: userId }).exec();
 
-    // Recalcular medias de las películas afectadas
     const peliculasAfectadas = await this.peliculaModel
       .find({ _id: { $in: result.favs } })
       .exec();

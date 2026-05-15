@@ -7,7 +7,6 @@ import { CrearValoracionDto } from '../pelicula/dto/pelicula.dto/valoracion.dto'
 export class ValoracionController {
   constructor(private readonly valoracionService: ValoracionService) {}
 
-  // GET /api/v2/valoraciones/:peliculaId
   @Get(':peliculaId')
   async getValoraciones(@Param('peliculaId') peliculaId: string) {
     try {
@@ -18,7 +17,6 @@ export class ValoracionController {
     }
   }
 
-  // GET /api/v2/valoraciones/:peliculaId/mia/:userId
   @Get(':peliculaId/mia/:userId')
   @UseGuards(JwtAuthGuard)
   async getMiValoracion(
@@ -33,7 +31,6 @@ export class ValoracionController {
     }
   }
 
-  // POST /api/v2/valoraciones/:peliculaId/:userId
   @Post(':peliculaId/:userId')
   @UseGuards(JwtAuthGuard)
   async crearOActualizar(
@@ -52,7 +49,6 @@ export class ValoracionController {
     }
   }
 
-  // DELETE /api/v2/valoraciones/:peliculaId/:userId
   @Delete(':peliculaId/:userId')
   @UseGuards(JwtAuthGuard)
   async eliminar(

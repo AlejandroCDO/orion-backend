@@ -1,4 +1,3 @@
-// --- USUARIO ---
 export interface User {
   _id: string;
   email: string;
@@ -7,7 +6,6 @@ export interface User {
   accessCode?: string;
 }
 
-// --- PELÍCULA ---
 export interface ApiResponsePelicula {
   _id: string;
   titulo: string;
@@ -20,7 +18,6 @@ export interface ApiResponsePelicula {
   clasEdad: '+0' | '+7' | '+12' | '+16' | '+18';
 }
 
-// --- SESIÓN Y PRECIOS ---
 export interface Precio {
   adulto: number;
   reducido: number;
@@ -37,7 +34,6 @@ export interface ApiResponseSession {
   asientos: boolean[][];
 }
 
-// --- RESERVA Y ENTRADAS ---
 export interface Entradas {
   adulto: number;
   reducido: number;

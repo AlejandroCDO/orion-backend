@@ -14,10 +14,10 @@ import { SessionSchema } from '../pelicula/schema/pelicula.schema/session.schema
         collection: 'sessions',
       },
     ]),
-    AuthModule, // Necesario para usar los guards de JWT
+    AuthModule,
   ],
   controllers: [SessionController],
   providers: [SessionService],
-  exports: [SessionService], // Lo exportamos porque ReservaModule lo necesita
+  exports: [SessionService],
 })
 export class SessionModule {}
